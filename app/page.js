@@ -1,112 +1,217 @@
-import React from 'react';
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HomePage = () => {
+  const heroRef = useRef(null);
+  const textRef = useRef(null);
+  const featuresRef = useRef(null);
+  const pricingRef = useRef(null);
+
+  useEffect(() => {
+    // Hero animations
+    gsap.from(textRef.current, {
+      x: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    gsap.from(".hero-image", {
+      x: 100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+    });
+
+    // Features animations
+    gsap.utils.toArray(".feature-card").forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: "power3.out",
+      });
+    });
+
+    // Pricing animations
+    gsap.utils.toArray(".pricing-card").forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: "power3.out",
+      });
+    });
+
+  }, []);
+
   return (
-    <div className="bg-gray-700 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
       {/* Hero Section */}
-      <section className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}> 
-        <div className="container mx-auto flex items-center justify-center h-full">
-          <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">Welcome to Chat-Turtle</h1>
-            <p className="text-lg mb-6">
-              Your friendly neighborhood for seamless conversations.
-            </p>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Get Started
-            </button>
+      <section ref={heroRef} className="min-h-screen pt-40 relative overflow-hidden">
+        <div className="container mx-auto px-4 h-full flex items-center">
+          <div className="ml-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div ref={textRef} className="text-white space-y-6">
+              <h1 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400 leading-tight">
+                Welcome to Chat-Turtle
+              </h1>
+              <p className="text-xl text-gray-300 leading-relaxed">
+                Your friendly neighborhood for seamless conversations.
+              </p>
+              <div className="flex gap-4 pt-4">
+                <button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg">
+                  Get Started
+                </button>
+                <button className="border-2 border-blue-500 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-500/10 transform transition-all duration-300">
+                  Learn More
+                </button>
+              </div>
+            </div>
+            <div className="hero-image relative h-[500px] flex justify-center">
+              <Image src="/images/turtle.png" alt="Chat Illustration" width={500} height={500} className="object-contain"  priority/>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-600">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Why Chat-Turtle?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-teal-600 rounded-lg shadow-md">
-              <svg className="w-10 h-10 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h14a2 2 0 002-2v-6a2 2 0 00-2-2h-5m0-4h5a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V5a2 2 0 00-2-2H9a2 2 0 00-2 2v6h10z"></path></svg>
-              <h3 className="text-xl font-semibold mb-2">Fast and Reliable</h3>
-              <p>Experience lightning-fast message delivery and enjoy uninterrupted conversations.</p>
-            </div>
-            <div className="p-6 bg-teal-600 rounded-lg shadow-md">
-              <svg className="w-10 h-10 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8v10c0 2.21-2 4-4 4H7a4 4 0 01-4-4V8c0-1.105.895-2 2-2h10c1.105 0 2 .895 2 2zm-3 4c0 .663-.537 1.2-1.2 1.2H4c-.663 0-1.2-.537-1.2-1.2V14c0-.663.537-1.2 1.2-1.2h7c.663 0 1.2.537 1.2 1.2z"></path></svg>
-              <h3 className="text-xl font-semibold mb-2">Secure and Private</h3>
-              <p>Your conversations are protected with end-to-end encryption, ensuring your privacy.</p>
-            </div>
-            <div className="p-6 bg-teal-600 rounded-lg shadow-md">
-              <svg className="w-10 h-10 text-blue-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2 .89 2 2s-.89 2-2 2-2-.89-2-2 .89-2 2-2z"></path></svg>
-              <h3 className="text-xl font-semibold mb-2">User-Friendly</h3>
-              <p>Enjoy a simple and intuitive interface designed for a seamless chatting experience.</p>
-            </div>
-          </div>
+     
+      <section ref={featuresRef} className="py-20 relative">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-16 text-white">
+      Why Choose <span className="text-blue-400">Chat-Turtle</span>?
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Fast and Reliable",
+          description: "Experience lightning-fast messaging with minimal latency, ensuring smooth conversations anytime, anywhere.",
+          icon: "⚡",
+        },
+        {
+          title: "Secure and Private",
+          description: "End-to-end encryption and robust security measures keep your conversations safe from prying eyes.",
+          icon: "🔒",
+        },
+        {
+          title: "User-Friendly",
+          description: "A sleek and intuitive interface designed for effortless navigation and seamless interaction.",
+          icon: "🎨",
+        },
+      ].map((feature, index) => (
+        <div
+          key={index}
+          className="feature-card p-8 bg-gradient-to-br from-gray-800 to-gray-900 
+          rounded-2xl shadow-xl border-2 border-white hover:transform hover:scale-105 
+          transition-all duration-300"
+        >
+          <div className="text-4xl text-blue-400 mb-4">{feature.icon}</div>
+          <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
+          <p className="text-gray-400">{feature.description}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
       {/* Pricing Section */}
-      <section className="py-20 bg-gray-800">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Choose Your Plan</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-gray-600 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">Free Plan</h3>
-              <p className="text-lg font-semibold">£0/month</p>
-              <ul className="list-disc ml-4">
-                <li>Unlimited Messages</li>
-                <li>Group Chats</li>
-                <li>Basic File Sharing</li>
-                <li>Limited Features</li>
-              </ul>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Start Free
-              </button>
-            </div>
-            <div className="p-6 bg-gray-600 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">Pro Plan</h3>
-              <p className="text-lg font-semibold">£5/month</p>
-              <ul className="list-disc ml-4">
-                <li>Unlimited Messages</li>
-                <li>Group Chats</li>
-                <li>Enhanced File Sharing</li>
-                <li>Priority Support</li>
-                <li>All Free Plan Features</li>
-              </ul>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Choose Pro
-              </button>
-            </div>
-            <div className="p-6 bg-gray-500 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">Enterprise Plan</h3>
-              <p className="text-lg font-semibold">Contact Us</p>
-              <ul className="list-disc ml-4">
-                <li>Customizable Features</li>
-                <li>Dedicated Support</li>
-                <li>Advanced Security</li>
-                <li>All Pro Plan Features</li>
-              </ul>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                Contact Sales
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-gray-800 py-16">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Join the Chat-Turtle Community</h2>
-          <p>Connect with friends, family, and colleagues effortlessly.</p>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">
-            Download Now
+    
+      <section ref={pricingRef} className="py-20 relative">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-16 text-white">
+      Choose Your <span className="text-blue-400">Plan</span>
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Free Plan",
+          price: "$0/month",
+          features: ["Basic messaging", "Limited storage", "Community support"],
+        },
+        {
+          name: "Pro Plan",
+          price: "$9.99/month",
+          features: ["Unlimited messaging", "100GB storage", "Priority support"],
+        },
+        {
+          name: "Enterprise Plan",
+          price: "Custom Pricing",
+          features: ["Advanced security", "Dedicated server", "24/7 support"],
+        },
+      ].map((plan, index) => (
+        <div
+          key={index}
+          className="pricing-card p-8 bg-gradient-to-br from-gray-800 to-gray-900 
+          rounded-2xl shadow-xl border-2 border-white hover:transform hover:scale-105 
+          transition-all duration-300"
+        >
+          <h3 className="text-2xl font-bold text-white mb-4">{plan.name}</h3>
+          <p className="text-blue-400 text-xl font-semibold">{plan.price}</p>
+          <ul className="mt-4 text-gray-300 space-y-2">
+            {plan.features.map((feature, i) => (
+              <li key={i} className="flex items-center gap-2">
+                <span className="text-green-400">✔</span> {feature}
+              </li>
+            ))}
+          </ul>
+          <button className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-full transition duration-300">
+            Choose Plan
           </button>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* Footer (Optional) */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 Chat-Turtle. All rights reserved.</p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-12">
+        <div className="container mx-auto px-4 text-center">
+          <p>© {new Date().getFullYear()} Chat-Turtle. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -114,8 +219,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-export const metadata = {
-  title: 'chat-turtle',
-  description: '...',
-}
- 
