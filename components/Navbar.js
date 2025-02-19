@@ -3,12 +3,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
 import gsap from 'gsap';
-
+import { useUser } from '@clerk/nextjs';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const linksRef = useRef([]);
+
+  // const user = useUser();
+  // console.log(user.user?.id);
+  // console.log(user.user?.name);
 
   useEffect(() => {
     // Initial animation
@@ -40,7 +44,7 @@ const Navbar = () => {
 
   return (
    
-    <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white fixed top-0 left-0 w-full z-50 shadow-lg border-b-[2px] border-white/30">
+    <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white fixed top-0 left-0 w-full z-50 shadow-lg border-b-[2px] border-white/30 sticky mb-5">
     <div className="container mx-auto px-4 py-4">
       <div className="flex justify-between items-center">
         <Link 
