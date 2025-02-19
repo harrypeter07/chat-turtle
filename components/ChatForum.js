@@ -47,7 +47,7 @@ const ChatForum = ({ clerkUser , slug}) => {
         members: [user.id],
     });
     setChannel(channel);
-
+  channel.addMembers([userId]);
   }, [client]);
   
 

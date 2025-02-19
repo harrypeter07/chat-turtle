@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const topics = [
   { text: "Python", img: "/images/python.png", desc: "Learn the versatile and powerful Python programming language." , slug: "Python"},
-  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScript "},
+  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScript"},
   { text: "React", img: "/images/react.png", desc: "Build dynamic and interactive user interfaces with React.", slug:"React" },
   { text: "Node.js", img: "/images/nodejs.png", desc: "Develop server-side applications with Node.js." , slug: "nodejs"},
   { text: "Data Science", img: "/images/data_science.png", desc: "Explore the world of data analysis and machine learning.", slug: "Data-Science"},
