@@ -1,61 +1,47 @@
-import { StreamChat } from "stream-chat"
+// /app/api/stream/token/route.ts
+import { StreamChat } from "stream-chat";
+import { auth } from "@clerk/nextjs";
 import { clerkClient } from "@clerk/nextjs/server";
 
+const api_key = process.env.NEXT_PUBLIC_STREAM_API_KEY;
+const api_secret = process.env.STREAM_API_SECRET;
 
-const api_key = "tpucdj6vdqxa";
-const api_secret = "wzvumujdm9t4u5m4uaphpbzpfqzdfypk6p4a8s5rz6s5ch35ks6pjgakfg43v6rv";
-const user_id = "user_2sAjFz9PrIG8wFLaFcTTWWTPXXc";
+export async function POST(request) {
+    try {
+        // Get the authenticated user from Clerk
+        const { userId } = auth();
+        
+        if (!userId) {
+            return Response.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
+        const serverClient = StreamChat.getInstance(api_key, api_secret);
 
-export async function POST( requst ) {
+        // Create Stream token
+        const token = serverClient.createToken(userId);
 
+        // Get the user from Clerk
+        const user = await clerkClient.users.getUser(userId);
 
+        // Update user's public metadata with the Stream token
+        await clerkClient.users.updateUser(userId, {
+            publicMetadata: {
+                ...user.publicMetadata, // Preserve existing metadata
+                streamToken: token
+            }
+        });
 
-
- const serverClient = StreamChat.getInstance(api_key, api_secret);
-
-    const user = await requst.json();
-    // console.log(body);
-
-// Create User Token
-const token = serverClient.createToken(user.data.id);
-console.log("New uSer CREATED" , token)
-
-const client = await clerkClient()
-
-await serverClient.upsertUser({ id: user.data.id})
-
-
-await client.users.updateUserMetadata( user.data.id , {
-    publicMetadata : {
-        token: token
+        return Response.json({ 
+            token,
+            success: true 
+        });
+    } catch (error) {
+        console.error("Token generation error:", error);
+        return Response.json({ 
+            error: "Failed to generate token",
+            details: error.message 
+        }, { 
+            status: 500 
+        });
     }
-})
-
-
- function capitalizeTitle(title) {
-    return title
-        .toLowerCase() // Convert everything to lowercase first
-        .split("-") // Split the string by spaces
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter
-        .join(" "); // Join words back into a string
 }
-
-
-
-   const slugs = ["Python", "JavaScript", "React", "nodejs", "Data-Science", "Ai"]
-
-   slugs.forEach(async (item)=> {
-    const channel = serverClient.channel("messaging", item, {
-        image: `https://getstream.io/random_png/?name=react`,
-        name: item.capitalizeTitle(),
-        created_by_id: user.data.id,
-    });
-
-    await channel.create();
-    channel.addMembers([user.data.id]);
-
-   })
-// console.log(token);
-    return Response.json({ message: 'Hello World' })
-  }

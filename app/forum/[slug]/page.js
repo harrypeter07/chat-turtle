@@ -6,13 +6,16 @@ import ChatForum from '@/components/ChatForum';
 
 import { currentUser } from '@clerk/nextjs/server';
 
-export default async function Page({params}) {
+export default async function Page({ params }) {
 const user = await currentUser();
-    // const client = useCreateChatClient({
-        // apiKey,
-        // tokenOrProvider: userToken,
-        // userData: { id: userId },
+    // const client = useCreateChatClient(l{
+    //     apiKey,
+    //     tokenOrProvider: userToken,
+    //     userData: { id: userId },
     //   });
+
+  console.log("hidjbgjgerjgnre")
+    console.log(user.publicMetadata.token)
 
     const slug = (await params).slug;
     // if (!client) return <div>Setting up client & connection...</div>;

@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 
 const topics = [
-  { text: "Python", img: "/images/python.png", desc: "Learn the versatile and powerful Python programming language." , slug: "Python"},
-  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScript"},
-  { text: "React", img: "/images/react.png", desc: "Build dynamic and interactive user interfaces with React.", slug:"React" },
-  { text: "Node.js", img: "/images/nodejs.png", desc: "Develop server-side applications with Node.js." , slug: "nodejs"},
-  { text: "Data Science", img: "/images/data_science.png", desc: "Explore the world of data analysis and machine learning.", slug: "Data-Science"},
-  { text: "Artificial Intelligence", img: "/images/ai.png", desc: "Delve into the exciting field of artificial intelligence." , slug: "Ai"},
+  { text: "Python", img: "/images/python.png", desc: "Learn the versatile and powerful Python programming language." , slug: "Python-n"},
+  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScript-new"},
+  { text: "React", img: "/images/react.png", desc: "Build dynamic and interactive user interfaces with React.", slug:"React-n" },
+  { text: "Node.js", img: "/images/nodejs.png", desc: "Develop server-side applications with Node.js." , slug: "nodejs-new"},
+  { text: "Data Science", img: "/images/data_science.png", desc: "Explore the world of data analysis and machine learning.", slug: "Data-Science-n"},
+  { text: "Artificial Intelligence", img: "/images/ai.png", desc: "Delve into the exciting field of artificial intelligence." , slug: "Ai-n"},
 ];
 
 
@@ -108,8 +108,8 @@ const Forums = () => {
                             onMouseEnter={(e) => handleButtonHover(e, true)}
                             onMouseLeave={(e) => handleButtonHover(e, false)}
                                >
-                            <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-                           <span className="relative">Read More</span>
+-new                            <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                           <span className="relative">Read Moreee</span>
                            </button>
 
                 </Link>
