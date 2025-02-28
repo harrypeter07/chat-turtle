@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 
 const topics = [
-  { text: "Python", img: "/images/python.png", desc: "Learn the versatile and powerful Python programming language." , slug: "Python-n"},
-  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScript-new"},
-  { text: "React", img: "/images/react.png", desc: "Build dynamic and interactive user interfaces with React.", slug:"React-n" },
-  { text: "Node.js", img: "/images/nodejs.png", desc: "Develop server-side applications with Node.js." , slug: "nodejs-new"},
-  { text: "Data Science", img: "/images/data_science.png", desc: "Explore the world of data analysis and machine learning.", slug: "Data-Science-n"},
-  { text: "Artificial Intelligence", img: "/images/ai.png", desc: "Delve into the exciting field of artificial intelligence." , slug: "Ai-n"},
+  { text: "Python", img: "/images/python.png", desc: "Learn the versatile and powerful Python programming language." , slug: "Pythonn"},
+  { text: "JavaScript", img: "/images/javascript.png", desc: "Master the core of web development with JavaScript." , slug: "JavaScriptt"},
+  { text: "React", img: "/images/react.png", desc: "Build dynamic and interactive user interfaces with React.", slug:"Reactt" },
+  { text: "Node.js", img: "/images/nodejs.png", desc: "Develop server-side applications with Node.js." , slug: "nodejss"},
+  { text: "Data Science", img: "/images/data_science.png", desc: "Explore the world of data analysis and machine learning.", slug: "Data-Sciencee"},
+  { text: "Artificial Intelligence", img: "/images/ai.png", desc: "Delve into the exciting field of artificial intelligence." , slug: "Aii"},
 ];
 
 
